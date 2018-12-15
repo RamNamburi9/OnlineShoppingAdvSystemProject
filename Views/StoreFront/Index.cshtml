@@ -1,0 +1,96 @@
+﻿@model RamsOnlineShoppingSystem.Models.Category
+@{
+    ViewBag.Title = @Model.Name;
+}
+
+<br />
+<br />
+<div class="row">
+    <div class="col-xs-12 col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+            @if (Model.Name == "Books")
+            {
+                <li class="active">
+                    <a href="~/StoreFront/Index/4">BOOKS</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/StoreFront/Index/4">BOOKS</a>
+                </li>
+            }
+            @if (Model.Name == "Electronics")
+            {
+                <li class="active">
+                    <a href="~/StoreFront/Index/2">ELECTRONICS</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/StoreFront/Index/2">ELECTRONICS</a>
+                </li>
+            }
+            @if (Model.Name == "Clothes")
+            {
+                <li class="active">
+                    <a href="~/StoreFront/Index/3">CLOTHES</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/StoreFront/Index/3">CLOTHES</a>
+                </li>
+            }
+            @if (Model.Name == "Shoes")
+            {
+                <li class="active">
+                    <a href="~/StoreFront/Index/1">SHOES</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a href="~/StoreFront/Index/1">SHOES</a>
+                </li>
+            }
+
+        </ul>
+    </div>
+    <div class="col-xs-12 col-md-9">
+        <div class="row">
+            @foreach (var product in Model.Products)
+            {
+                <div class="col-xs-12 col-md-3">
+                    <div class="thumbnail">
+                        <img class="img-responsive" src="~/Content/Images/Products/@(product.Name).jpg">
+                        <div class="caption text-center">
+                            <p>
+                                <b>Name:</b> <span>@product.Name</span>
+                            </p>
+                            <p>
+                                <b>Price:</b> <span>@product.Price USD</span>
+                            </p>
+                            @if (product.numberofitems > 0)
+                            {
+                                <p class="text-center">
+                                    @Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id = product.Id }, new { @class = "btn btn-info" })
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="text-center">
+                                 <button class="btn btn-warning">Out of Stock</button>
+                                </p>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+﻿@using System.Globalization
+@model int
+
+@{
+    ViewBag.Title = "Order Complete";
+}
+
+<h2>Thanks for your order! </h2>
+<p class="font18">
+   Your order has been saved and email confirmation has been sent your email.
+    @Html.ActionLink("store", "Index", "Home")
+</p>

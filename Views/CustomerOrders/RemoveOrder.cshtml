@@ -1,0 +1,62 @@
+﻿@model IEnumerable<OnlineShoppingAdvSysProject.ViewModels.CustomerOrdersViewModel>
+@using System.Globalization
+@{
+    ViewBag.Title = "CustomerOrders";
+    CultureInfo us = new CultureInfo("en-US");
+}
+
+<h2>CustomerOrders</h2>
+
+<table class="table-responsive table-bordered table-striped">
+    <tr>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price (each)
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>Sub-total</th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr id="row-@item.Products.Name ">
+            <td>
+                @Html.ActionLink(item.Products.Name, "Details", "Products", new { id = item.Products.Id }, null)
+            </td>
+            <td>
+                @item.Products.Price
+            </td>
+            <td id="item-count-@item.OrderedProduct.Quantity">
+                @item.OrderedProduct.Quantity
+            </td>
+            <td>
+                @((item.Products.Price * item.OrderedProduct.Quantity).ToString("c", us))
+            </td>
+            <td>
+                <p class="text-center">
+                    @Html.ActionLink("Remove from orders", "Index", "CustomerOrders", new { id = @item.Products.Id, orid = @item.OrderedProduct.CustomerOrderId }, null)
+                </p>
+                <p class="text-center">
+                    @Html.ActionLink("Save Order", "SendEmail", "ShoppingCart", new { id = @item.Products.Id }, new { @class = "btn btn-info" })
+                </p>
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+<table class="table-responsive table-bordered table-striped">
+    <tr>
+        <td>
+            Total Amout
+        </td>
+        <td></td>
+        <td></td>
+        <td id="cart-total" class="text-success"></td>
+    </tr>
+</table>
